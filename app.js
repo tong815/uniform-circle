@@ -46,6 +46,230 @@ const state = {
 
 const $ = (id) => document.getElementById(id);
 
+const I18N = {
+  en: {
+    docTitle: "Uniform Circular Motion",
+    eyebrow: "Grade 12 physics",
+    message: "Velocity describes how position changes with time. Acceleration describes how velocity changes with time. Net force determines acceleration through Newton’s second law.",
+    chainAria: "Conceptual chain",
+    chainPos: "Position",
+    chainDis: "Displacement",
+    chainVel: "Velocity",
+    chainAcc: "Acceleration",
+    chainForce: "Net force",
+    howto: "Read the panels from left to right. Each one is the next operation on the same motion. Directions match across panels. Lengths do not: every panel has its own scale.",
+    limitBanner: "Limit view: the time interval is shrinking toward zero. The chord lines up with the tangent, and the average vectors land on the instantaneous vectors.",
+    spacesAria: "Three coordinate spaces",
+    posTitle: "Position Space (m)",
+    posSub: "The object moving in a circle. <var>O</var> is the center.",
+    posCanvas: "Position space. Circular path, position vectors, displacement chord, tangent velocity, and net force.",
+    bridgeVel: "Displacement divided by delta t is average velocity",
+    velTitle: "Velocity Space (m/s)",
+    velSub: "Every velocity arrow starts at <var>O</var><sub>v</sub>.",
+    velCanvas: "Velocity space. Instantaneous velocities, average velocity, and velocity change, all drawn from one origin.",
+    bridgeAcc: "Velocity change divided by delta t is average acceleration",
+    accTitle: "Acceleration Space (m/s²)",
+    accSub: "Every acceleration arrow starts at <var>O</var><sub>a</sub>.",
+    accCanvas: "Acceleration space. Instantaneous and average acceleration drawn from one origin.",
+    play: "Play",
+    pause: "Pause",
+    reset: "Reset",
+    stepBack: "Step −",
+    stepFwd: "Step +",
+    stepBackTitle: "Step backward by T/24",
+    stepFwdTitle: "Step forward by T/24",
+    speed: "Speed",
+    timeLabel: "Time <var>t</var>",
+    intervalLabel: "Interval Δ<var>t</var>",
+    periodTitle: "One full period, T",
+    limitBtn: "Limit View",
+    paramTitle: "Parameters and visibility",
+    radiusLabel: "Radius <var>R</var> (m)",
+    omegaLabel: "Angular velocity <var>ω</var> (rad/s)",
+    massLabel: "Mass <var>m</var> (kg)",
+    chipsAria: "Derived quantities",
+    presetAria: "Interval presets",
+    setDt: "Set Δ<var>t</var>",
+    focusTitle: "Focus the picture",
+    viewAria: "Display presets",
+    viewDis: "Displacement",
+    viewVel: "Velocity",
+    viewAcc: "Acceleration",
+    viewForce: "Net force",
+    viewFull: "Full chain",
+    legendDelta: "Finite difference",
+    legendInstant: "Instantaneous",
+    legendAvg: "Average",
+    legendForce: "Net force",
+    legendPos: "Position vectors",
+    legendRef: "Paths and axes",
+    showPosition: "Position vectors",
+    showDisplacement: "Displacement vector",
+    showInstVel: "Instantaneous velocity",
+    showAvgVel: "Average velocity",
+    showVelDiff: "Velocity difference",
+    showInstAcc: "Instantaneous acceleration",
+    showAccFuture: "Acceleration at <var>t</var> + Δ<var>t</var>",
+    showAvgAcc: "Average acceleration",
+    showForce: "Net force",
+    showCircles: "Circles in the vector spaces",
+    showComponents: "Numerical vector components",
+    showFormulas: "Mathematical formulas",
+    infoTitle: "What the numbers say",
+    eqTitle: "Equations",
+    eqNote: "Centripetal force is not an extra kind of force. It is the net force pointing toward the center, the force that produces the centripetal acceleration. Changing the mass changes <var>F</var>. It does not change <var>a</var>.",
+    turnNote: " Path length is {n} revolutions.",
+    posFoot: "Distance along the arc: {arc} m. Displacement |Δr|: {dr} m.{turns} Scales differ: {pos} px = 1 m; velocity arrows {vel} px = 1 m/s; force arrows {force} px = 1 N.",
+    velFoot: "Speed |v| = {speed} m/s and does not change. |v_avg| = {vavg} m/s. The dashed Δv and the solid Δv from Ov are the same vector. This scale stays fixed while Δt changes.",
+    accFoot: "|a| = {a} m/s², pointing toward the center. |a_avg| = {aavg} m/s². a(t) points opposite r(t). Do not compare these lengths with the other panels.",
+    insightPeriod: "This interval is a whole number of periods. The object is back at the same position, so displacement is zero and average velocity is zero. The velocity vector is also back to the same value, so average acceleration is zero. Instantaneous velocity and acceleration are not zero, and the distance along the arc is not zero.",
+    insightHalf: "This interval is about half a period. Displacement is a diameter of the circle. Average velocity points along that diameter. Instantaneous velocity stays tangent, so the two are not the same vector.",
+    insightLimit: "The time interval is very small. The displacement chord is nearly tangent, so average velocity is nearly the instantaneous velocity. Average acceleration is nearly the instantaneous acceleration. A finite difference has become a derivative.",
+    insightDefault: "The blue chord is displacement, not the distance along the arc. Divide it by Δt to get the orange average velocity, which points along the chord. The green velocity is tangent. Divide the blue change in velocity by Δt to get the orange average acceleration.",
+    metricDistance: "<p><strong>Distance and displacement.</strong> Arc length s = {arc} m. |Δr| = {dr} m.</p>",
+    metricSpeed: "<p><strong>Speed and velocity.</strong> Average speed s/Δt = {avg} m/s. Instantaneous speed |v| = {speed} m/s. Magnitude of average velocity |v_avg| = {vavg} m/s.</p>",
+    metricClose: "<p><strong>Closing in.</strong> |v_avg − v(t)| = {dv} m/s. |a_avg − a(t)| = {da} m/s².</p>",
+    metricPerp: "<p><strong>Perpendicular.</strong> v · a = {dot} (m/s)(m/s²). Velocity is perpendicular to acceleration, and the speed does not change.</p>",
+    metricAngle: "<p><strong>Angular velocity.</strong> Δθ = {rad} rad ({deg}). ω = Δθ/Δt = {omega} rad/s.</p>",
+    metricForce: "<p><strong>Net force.</strong> |F| = |m a| = {f} N, and m v²/R = {c} N. Both describe the same inward force.</p>",
+    thVector: "Vector",
+    thMag: "Magnitude",
+    thDir: "Direction",
+    groupPos: "Position (m)",
+    groupVel: "Velocity (m/s)",
+    groupAcc: "Acceleration (m/s²) and force (N)",
+  },
+  zh: {
+    docTitle: "匀速圆周运动",
+    eyebrow: "高中物理",
+    message: "速度描述位置如何随时间变化。加速度描述速度如何随时间变化。合力通过牛顿第二定律决定加速度。",
+    chainAria: "概念链",
+    chainPos: "位置",
+    chainDis: "位移",
+    chainVel: "速度",
+    chainAcc: "加速度",
+    chainForce: "合力",
+    howto: "从左到右读这三块图。每一块都是同一次运动的下一步运算。各图的方向一致，长度不能直接比较：每块图有自己的比例尺。",
+    limitBanner: "极限视图：时间间隔正在缩小到零。弦逐渐与切线重合，平均矢量落到瞬时矢量上。",
+    spacesAria: "三个坐标空间",
+    posTitle: "位置空间（m）",
+    posSub: "物体沿圆周运动。<var>O</var> 是圆心。",
+    posCanvas: "位置空间。圆周轨迹、位置矢量、位移弦、切向速度和合力。",
+    bridgeVel: "位移除以 Δt 得到平均速度",
+    velTitle: "速度空间（m/s）",
+    velSub: "所有速度箭头都从 <var>O</var><sub>v</sub> 出发。",
+    velCanvas: "速度空间。瞬时速度、平均速度和速度变化都从同一个原点画出。",
+    bridgeAcc: "速度变化除以 Δt 得到平均加速度",
+    accTitle: "加速度空间（m/s²）",
+    accSub: "所有加速度箭头都从 <var>O</var><sub>a</sub> 出发。",
+    accCanvas: "加速度空间。瞬时加速度和平均加速度都从同一个原点画出。",
+    play: "播放",
+    pause: "暂停",
+    reset: "复位",
+    stepBack: "后退",
+    stepFwd: "前进",
+    stepBackTitle: "时间后退 T/24",
+    stepFwdTitle: "时间前进 T/24",
+    speed: "倍速",
+    timeLabel: "时间 <var>t</var>",
+    intervalLabel: "间隔 Δ<var>t</var>",
+    periodTitle: "一个完整周期 T",
+    limitBtn: "极限视图",
+    paramTitle: "参数与显示",
+    radiusLabel: "半径 <var>R</var>（m）",
+    omegaLabel: "角速度 <var>ω</var>（rad/s）",
+    massLabel: "质量 <var>m</var>（kg）",
+    chipsAria: "导出量",
+    presetAria: "时间间隔预设",
+    setDt: "设置 Δ<var>t</var>",
+    focusTitle: "聚焦画面",
+    viewAria: "显示预设",
+    viewDis: "位移",
+    viewVel: "速度",
+    viewAcc: "加速度",
+    viewForce: "合力",
+    viewFull: "完整链条",
+    legendDelta: "有限差分",
+    legendInstant: "瞬时量",
+    legendAvg: "平均量",
+    legendForce: "合力",
+    legendPos: "位置矢量",
+    legendRef: "轨迹与坐标轴",
+    showPosition: "位置矢量",
+    showDisplacement: "位移矢量",
+    showInstVel: "瞬时速度",
+    showAvgVel: "平均速度",
+    showVelDiff: "速度变化",
+    showInstAcc: "瞬时加速度",
+    showAccFuture: "<var>t</var> + Δ<var>t</var> 时的加速度",
+    showAvgAcc: "平均加速度",
+    showForce: "合力",
+    showCircles: "矢量空间中的圆",
+    showComponents: "矢量的数值分量",
+    showFormulas: "数学公式",
+    infoTitle: "数值在说什么",
+    eqTitle: "公式",
+    eqNote: "向心力不是一种额外的力。它是指向圆心的合力，也就是产生向心加速度的那个力。改变质量会改变 <var>F</var>，不会改变 <var>a</var>。",
+    turnNote: " 路程相当于 {n} 圈。",
+    posFoot: "弧长（路程）：{arc} m。位移大小 |Δr|：{dr} m。{turns}比例尺不同：{pos} px = 1 m；速度箭头 {vel} px = 1 m/s；力箭头 {force} px = 1 N。",
+    velFoot: "速率 |v| = {speed} m/s，保持不变。|v_avg| = {vavg} m/s。虚线 Δv 和从 Ov 画出的实线 Δv 是同一个矢量。改变 Δt 时，这块图的比例尺不变。",
+    accFoot: "|a| = {a} m/s²，指向圆心。|a_avg| = {aavg} m/s²。a(t) 的方向与 r(t) 相反。不要把这里的长度拿去和其他图比较。",
+    insightPeriod: "这个时间间隔是整数个周期。物体回到了原来的位置，所以位移是零，平均速度也是零。速度矢量同样回到了原值，所以平均加速度是零。瞬时速度和瞬时加速度并不是零，沿圆弧走过的路程也不是零。",
+    insightHalf: "这个时间间隔大约是半个周期。位移是圆的一条直径。平均速度沿着这条直径。瞬时速度仍然沿切线方向，所以二者不是同一个矢量。",
+    insightLimit: "时间间隔非常小。位移弦几乎与切线重合，所以平均速度几乎就是瞬时速度。平均加速度也几乎就是瞬时加速度。有限差分变成了导数。",
+    insightDefault: "蓝色的弦是位移，不是沿圆弧走过的路程。把它除以 Δt，得到橙色的平均速度，方向沿弦。绿色的速度沿切线。把蓝色的速度变化除以 Δt，得到橙色的平均加速度。",
+    metricDistance: "<p><strong>路程与位移。</strong>弧长 s = {arc} m。|Δr| = {dr} m。</p>",
+    metricSpeed: "<p><strong>速率与速度。</strong>平均速率 s/Δt = {avg} m/s。瞬时速率 |v| = {speed} m/s。平均速度的大小 |v_avg| = {vavg} m/s。</p>",
+    metricClose: "<p><strong>接近程度。</strong>|v_avg − v(t)| = {dv} m/s。|a_avg − a(t)| = {da} m/s²。</p>",
+    metricPerp: "<p><strong>互相垂直。</strong>v · a = {dot} (m/s)(m/s²)。速度与加速度垂直，速率不改变。</p>",
+    metricAngle: "<p><strong>角速度。</strong>Δθ = {rad} rad（{deg}）。ω = Δθ/Δt = {omega} rad/s。</p>",
+    metricForce: "<p><strong>合力。</strong>|F| = |m a| = {f} N，并且 m v²/R = {c} N。二者描述的是同一个指向圆心的力。</p>",
+    thVector: "矢量",
+    thMag: "大小",
+    thDir: "方向",
+    groupPos: "位置（m）",
+    groupVel: "速度（m/s）",
+    groupAcc: "加速度（m/s²）与力（N）",
+  },
+};
+
+let lang = loadLang();
+
+function loadLang() {
+  try {
+    const saved = localStorage.getItem("ucm-lang");
+    if (saved === "zh" || saved === "en") return saved;
+  } catch (err) { /* private mode or blocked storage */ }
+  return "en";
+}
+
+function t(key) {
+  const pack = I18N[lang] || I18N.en;
+  return pack[key] != null ? pack[key] : I18N.en[key];
+}
+
+function fill(key, vars) {
+  return t(key).replace(/\{(\w+)\}/g, (_, name) => (vars[name] == null ? "" : vars[name]));
+}
+
+function applyLang() {
+  document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+  document.title = t("docTitle");
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    el.innerHTML = t(el.dataset.i18n);
+  });
+  document.querySelectorAll("[data-i18n-title]").forEach((el) => {
+    el.title = t(el.dataset.i18nTitle);
+  });
+  document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
+    el.setAttribute("aria-label", t(el.dataset.i18nAria));
+  });
+  const btn = $("lang-btn");
+  btn.textContent = lang === "zh" ? "English" : "中文";
+  btn.setAttribute("aria-label", lang === "zh" ? "切换到英文" : "Switch to Chinese");
+  try { localStorage.setItem("ucm-lang", lang); } catch (err) { /* ignore */ }
+}
+
 function position(t, R, omega) {
   const th = omega * t;
   return { x: R * Math.cos(th), y: R * Math.sin(th) };
@@ -598,17 +822,23 @@ function updateCopy(model) {
   const velPx = model._velScale || 0;
   const forcePx = model._forceScale || 0;
   const turns = model.arc / (2 * Math.PI * model.R);
-  const turnNote = turns > 0.98 ? " Path length is " + fmt(turns) + " revolutions." : "";
-  $("pos-foot").textContent =
-    "Distance along the arc: " + fmt(model.arc) + " m. Displacement |Δr|: " + fmt(mag(model.dr)) +
-    " m." + turnNote + " Scales differ: " + fmt(posPx) + " px = 1 m; velocity arrows " +
-    fmt(velPx) + " px = 1 m/s; force arrows " + fmt(forcePx) + " px = 1 N.";
-  $("vel-foot").textContent =
-    "Speed |v| = " + fmt(model.speed) + " m/s and does not change. |v_avg| = " + fmt(mag(model.vAvg)) +
-    " m/s. The dashed Δv and the solid Δv from Ov are the same vector. This scale stays fixed while Δt changes.";
-  $("acc-foot").textContent =
-    "|a| = " + fmt(model.aMag) + " m/s², pointing toward the center. |a_avg| = " + fmt(mag(model.aAvg)) +
-    " m/s². a(t) points opposite r(t). Do not compare these lengths with the other panels.";
+  const turnNote = turns > 0.98 ? fill("turnNote", { n: fmt(turns) }) : "";
+  $("pos-foot").textContent = fill("posFoot", {
+    arc: fmt(model.arc),
+    dr: fmt(mag(model.dr)),
+    turns: turnNote,
+    pos: fmt(posPx),
+    vel: fmt(velPx),
+    force: fmt(forcePx),
+  });
+  $("vel-foot").textContent = fill("velFoot", {
+    speed: fmt(model.speed),
+    vavg: fmt(mag(model.vAvg)),
+  });
+  $("acc-foot").textContent = fill("accFoot", {
+    a: fmt(model.aMag),
+    aavg: fmt(mag(model.aAvg)),
+  });
 
   const box = $("insight");
   const nearestTurn = Math.round(turns);
@@ -618,35 +848,27 @@ function updateCopy(model) {
   box.className = "insight";
   if (nearPeriod) {
     box.className = "insight period";
-    box.textContent = "This interval is a whole number of periods. The object is back at the same position, so displacement is zero and average velocity is zero. The velocity vector is also back to the same value, so average acceleration is zero. Instantaneous velocity and acceleration are not zero, and the distance along the arc is not zero.";
+    box.textContent = t("insightPeriod");
   } else if (nearHalf) {
     box.className = "insight half";
-    box.textContent = "This interval is about half a period. Displacement is a diameter of the circle. Average velocity points along that diameter. Instantaneous velocity stays tangent, so the two are not the same vector.";
+    box.textContent = t("insightHalf");
   } else if (nearLimit) {
     box.className = "insight limit";
-    box.textContent = "The time interval is very small. The displacement chord is nearly tangent, so average velocity is nearly the instantaneous velocity. Average acceleration is nearly the instantaneous acceleration. A finite difference has become a derivative.";
+    box.textContent = t("insightLimit");
   } else {
-    box.textContent = "The blue chord is displacement, not the distance along the arc. Divide it by Δt to get the orange average velocity, which points along the chord. The green velocity is tangent. Divide the blue change in velocity by Δt to get the orange average acceleration.";
+    box.textContent = t("insightDefault");
   }
 
   const avgSpeed = model.arc / model.dt;
   const dvInst = mag(sub(model.vAvg, model.v1));
   const daInst = mag(sub(model.aAvg, model.a1));
   $("metrics").innerHTML = [
-    "<p><strong>Distance and displacement.</strong> Arc length s = " + fmt(model.arc) +
-      " m. |Δr| = " + fmt(mag(model.dr)) + " m.</p>",
-    "<p><strong>Speed and velocity.</strong> Average speed s/Δt = " + fmt(avgSpeed) +
-      " m/s. Instantaneous speed |v| = " + fmt(mag(model.v1)) +
-      " m/s. Magnitude of average velocity |v_avg| = " + fmt(mag(model.vAvg)) + " m/s.</p>",
-    "<p><strong>Closing in.</strong> |v_avg − v(t)| = " + fmt(dvInst) +
-      " m/s. |a_avg − a(t)| = " + fmt(daInst) + " m/s².</p>",
-    "<p><strong>Perpendicular.</strong> v · a = " + fmt(dot(model.v1, model.a1)) +
-      " (m/s)(m/s²). Velocity is perpendicular to acceleration, and the speed does not change.</p>",
-    "<p><strong>Angular velocity.</strong> Δθ = " + fmt(model.dTheta) +
-      " rad (" + fmtDeg(model.dTheta) + "). ω = Δθ/Δt = " + fmt(model.dTheta / model.dt) + " rad/s.</p>",
-    "<p><strong>Net force.</strong> |F| = |m a| = " + fmt(model.forceMag) +
-      " N, and m v²/R = " + fmt(model.centrip) +
-      " N. Both describe the same inward force.</p>",
+    fill("metricDistance", { arc: fmt(model.arc), dr: fmt(mag(model.dr)) }),
+    fill("metricSpeed", { avg: fmt(avgSpeed), speed: fmt(mag(model.v1)), vavg: fmt(mag(model.vAvg)) }),
+    fill("metricClose", { dv: fmt(dvInst), da: fmt(daInst) }),
+    fill("metricPerp", { dot: fmt(dot(model.v1, model.a1)) }),
+    fill("metricAngle", { rad: fmt(model.dTheta), deg: fmtDeg(model.dTheta), omega: fmt(model.dTheta / model.dt) }),
+    fill("metricForce", { f: fmt(model.forceMag), c: fmt(model.centrip) }),
   ].join("");
 
   $("chips").innerHTML = [
@@ -678,17 +900,17 @@ function row(name, v, unit) {
 function componentTable(model) {
   return [
     "<table class=\"components\">",
-    "<tr><th>Vector</th><th>x</th><th>y</th><th>Magnitude</th><th>Direction</th></tr>",
-    "<tr><th class=\"group\" colspan=\"5\">Position (m)</th></tr>",
+    "<tr><th>" + t("thVector") + "</th><th>x</th><th>y</th><th>" + t("thMag") + "</th><th>" + t("thDir") + "</th></tr>",
+    "<tr><th class=\"group\" colspan=\"5\">" + t("groupPos") + "</th></tr>",
     row("r(t)", model.r1, "m"),
     row("r(t+Δt)", model.r2, "m"),
     row("Δr", model.dr, "m"),
-    "<tr><th class=\"group\" colspan=\"5\">Velocity (m/s)</th></tr>",
+    "<tr><th class=\"group\" colspan=\"5\">" + t("groupVel") + "</th></tr>",
     row("v(t)", model.v1, "m/s"),
     row("v(t+Δt)", model.v2, "m/s"),
     row("v_avg", model.vAvg, "m/s"),
     row("Δv", model.dv, "m/s"),
-    "<tr><th class=\"group\" colspan=\"5\">Acceleration (m/s²) and force (N)</th></tr>",
+    "<tr><th class=\"group\" colspan=\"5\">" + t("groupAcc") + "</th></tr>",
     row("a(t)", model.a1, "m/s²"),
     row("a(t+Δt)", model.a2, "m/s²"),
     row("a_avg", model.aAvg, "m/s²"),
@@ -773,6 +995,10 @@ function setShow(partial) {
 }
 
 function bind() {
+  $("lang-btn").addEventListener("click", () => {
+    lang = lang === "zh" ? "en" : "zh";
+    applyLang();
+  });
   $("play").addEventListener("click", () => { state.playing = true; });
   $("pause").addEventListener("click", () => { state.playing = false; });
   $("reset").addEventListener("click", () => {
@@ -931,6 +1157,7 @@ function boot() {
     node.classList.toggle("ok", errors.length === 0);
     node.textContent = errors.length ? errors.join(" | ") : "PASS";
   }
+  applyLang();
   bind();
   requestAnimationFrame(frame);
 }

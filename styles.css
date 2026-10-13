@@ -39,6 +39,29 @@ button, input, select { font: inherit; color: inherit; }
   padding: 18px 18px 28px;
 }
 
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.lang-btn {
+  flex: none;
+  min-width: 5.6rem;
+  margin-top: 2px;
+  font-weight: 700;
+}
+
+html[lang="zh-CN"] body {
+  font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+}
+
+html[lang="zh-CN"] .eyebrow {
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
 .top h1 {
   margin: 0;
   font-size: 1.7rem;
