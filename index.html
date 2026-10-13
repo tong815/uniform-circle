@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uniform Circular Motion</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page">
+    <header class="top">
+      <div>
+        <p class="eyebrow">Grade 12 physics</p>
+        <h1>Uniform Circular Motion</h1>
+        <p class="message">Velocity describes how position changes with time. Acceleration describes how velocity changes with time. Net force determines acceleration through Newton’s second law.</p>
+      </div>
+      <ol class="chain" aria-label="Conceptual chain">
+        <li class="c-pos">Position</li>
+        <li class="c-dis">Displacement</li>
+        <li class="c-vel">Velocity</li>
+        <li class="c-acc">Acceleration</li>
+        <li class="c-for">Net force</li>
+      </ol>
+      <p class="howto">Read the panels from left to right. Each one is the next operation on the same motion. Directions match across panels. Lengths do not: every panel has its own scale.</p>
+    </header>
+
+    <p id="limit-banner" class="limit-banner" hidden>Limit view: the time interval is shrinking toward zero. The chord lines up with the tangent, and the average vectors land on the instantaneous vectors.</p>
+    <p id="self-check" class="self-check" hidden></p>
+
+    <section class="spaces" aria-label="Three coordinate spaces">
+      <article class="panel panel-pos">
+        <header>
+          <h2>Position Space (m)</h2>
+          <p>The object moving in a circle. <var>O</var> is the center.</p>
+        </header>
+        <div class="canvas-wrap">
+          <canvas id="pos-canvas" width="640" height="640" aria-label="Position space. Circular path, position vectors, displacement chord, tangent velocity, and net force."></canvas>
+        </div>
+        <p class="foot" id="pos-foot"></p>
+      </article>
+
+      <div class="bridge" aria-label="Displacement divided by delta t is average velocity">
+        <p class="from delta">Δ<var>r</var></p>
+        <p class="arrow">→ ÷ Δ<var>t</var> →</p>
+        <p class="to avg"><var>v</var><sub>avg</sub></p>
+      </div>
+
+      <article class="panel panel-vel">
+        <header>
+          <h2>Velocity Space (m/s)</h2>
+          <p>Every velocity arrow starts at <var>O</var><sub>v</sub>.</p>
+        </header>
+        <div class="canvas-wrap">
+          <canvas id="vel-canvas" width="640" height="640" aria-label="Velocity space. Instantaneous velocities, average velocity, and velocity change, all drawn from one origin."></canvas>
+        </div>
+        <p class="foot" id="vel-foot"></p>
+      </article>
+
+      <div class="bridge" aria-label="Velocity change divided by delta t is average acceleration">
+        <p class="from delta">Δ<var>v</var></p>
+        <p class="arrow">→ ÷ Δ<var>t</var> →</p>
+        <p class="to avg"><var>a</var><sub>avg</sub></p>
+      </div>
+
+      <article class="panel panel-acc">
+        <header>
+          <h2>Acceleration Space (m/s²)</h2>
+          <p>Every acceleration arrow starts at <var>O</var><sub>a</sub>.</p>
+        </header>
+        <div class="canvas-wrap">
+          <canvas id="acc-canvas" width="640" height="640" aria-label="Acceleration space. Instantaneous and average acceleration drawn from one origin."></canvas>
+        </div>
+        <p class="foot" id="acc-foot"></p>
+      </article>
+    </section>
+
+    <div class="transport">
+      <div class="transport-inner">
+        <div class="play-row">
+          <button type="button" id="play" class="primary">Play</button>
+          <button type="button" id="pause">Pause</button>
+          <button type="button" id="reset">Reset</button>
+          <button type="button" id="step-back" title="Step backward by T/24">Step −</button>
+          <button type="button" id="step-fwd" title="Step forward by T/24">Step +</button>
+          <label class="speed">
+            Speed
+            <select id="speed">
+              <option value="0.25">0.25×</option>
+              <option value="0.5">0.5×</option>
+              <option value="1" selected>1×</option>
+              <option value="2">2×</option>
+            </select>
+          </label>
+        </div>
+        <label class="slider-field">
+          <span>Time <var>t</var> <strong id="t-read"></strong></span>
+          <input id="t-slider" type="range" min="0" max="30" step="0.01" value="0.8">
+        </label>
+        <label class="slider-field">
+          <span>Interval Δ<var>t</var> <strong id="dt-read"></strong></span>
+          <span class="slider-wrap">
+            <input id="dt-slider" type="range" min="0.01" max="12" step="0.001" value="1.047">
+            <i id="period-tick" title="One full period, T"><span>T</span></i>
+          </span>
+        </label>
+        <button type="button" id="limit-btn" class="limit-btn">Limit View</button>
+      </div>
+    </div>
+
+    <section class="dashboard">
+      <div class="card">
+        <h2>Parameters and visibility</h2>
+
+        <div class="params">
+          <label class="param">
+            <span>Radius <var>R</var> (m)</span>
+            <span class="param-row">
+              <input id="r-slider" type="range" min="0.5" max="5" step="0.01" value="2">
+              <input id="r-num" type="number" min="0.5" max="5" step="0.01" value="2">
+            </span>
+          </label>
+          <label class="param">
+            <span>Angular velocity <var>ω</var> (rad/s)</span>
+            <span class="param-row">
+              <input id="w-slider" type="range" min="0.2" max="4" step="0.01" value="1">
+              <input id="w-num" type="number" min="0.2" max="4" step="0.01" value="1">
+            </span>
+          </label>
+          <label class="param">
+            <span>Mass <var>m</var> (kg)</span>
+            <span class="param-row">
+              <input id="m-slider" type="range" min="0.2" max="5" step="0.01" value="1">
+              <input id="m-num" type="number" min="0.2" max="5" step="0.01" value="1">
+            </span>
+          </label>
+        </div>
+
+        <div class="chips" id="chips" aria-label="Derived quantities"></div>
+
+        <div class="presets" role="group" aria-label="Interval presets">
+          <span>Set Δ<var>t</var></span>
+          <button type="button" data-preset="12">T/12</button>
+          <button type="button" data-preset="4">T/4</button>
+          <button type="button" data-preset="2">T/2</button>
+          <button type="button" data-preset="1">T</button>
+        </div>
+
+        <h3>Focus the picture</h3>
+        <div class="presets" role="group" aria-label="Display presets">
+          <button type="button" data-view="displacement">Displacement</button>
+          <button type="button" data-view="velocity">Velocity</button>
+          <button type="button" data-view="acceleration">Acceleration</button>
+          <button type="button" data-view="force">Net force</button>
+          <button type="button" data-view="full" class="is-on">Full chain</button>
+        </div>
+
+        <ul class="legend">
+          <li><i class="swatch delta"></i> Finite difference</li>
+          <li><i class="swatch instant"></i> Instantaneous</li>
+          <li><i class="swatch avg"></i> Average</li>
+          <li><i class="swatch force"></i> Net force</li>
+          <li><i class="swatch pos"></i> Position vectors</li>
+          <li><i class="swatch ref"></i> Paths and axes</li>
+        </ul>
+
+        <div class="check-grid" id="toggles">
+          <label class="check"><input type="checkbox" data-show="positionVectors" checked> Position vectors</label>
+          <label class="check"><input type="checkbox" data-show="displacement" checked> Displacement vector</label>
+          <label class="check"><input type="checkbox" data-show="instVelocity" checked> Instantaneous velocity</label>
+          <label class="check"><input type="checkbox" data-show="avgVelocity" checked> Average velocity</label>
+          <label class="check"><input type="checkbox" data-show="velocityDiff" checked> Velocity difference</label>
+          <label class="check"><input type="checkbox" data-show="instAccel" checked> Instantaneous acceleration</label>
+          <label class="check"><input type="checkbox" data-show="accelFuture"> Acceleration at <var>t</var> + Δ<var>t</var></label>
+          <label class="check"><input type="checkbox" data-show="avgAccel" checked> Average acceleration</label>
+          <label class="check"><input type="checkbox" data-show="netForce" checked> Net force</label>
+          <label class="check"><input type="checkbox" data-show="circles" checked> Circles in the vector spaces</label>
+          <label class="check"><input type="checkbox" data-show="components"> Numerical vector components</label>
+          <label class="check"><input type="checkbox" data-show="formulas" checked> Mathematical formulas</label>
+        </div>
+      </div>
+
+      <div class="card info-card">
+        <h2>What the numbers say</h2>
+        <div id="insight" class="insight"></div>
+        <div id="metrics" class="metrics"></div>
+        <div id="component-panel"></div>
+        <div id="formula-panel">
+          <h3>Equations</h3>
+          <ul class="eqs">
+            <li><var>r</var>(<var>t</var>) = <var>R</var> (cos <var>ωt</var>, sin <var>ωt</var>)</li>
+            <li><var>v</var>(<var>t</var>) = <var>Rω</var> (−sin <var>ωt</var>, cos <var>ωt</var>)</li>
+            <li><var>a</var>(<var>t</var>) = −<var>Rω</var><sup>2</sup> (cos <var>ωt</var>, sin <var>ωt</var>)</li>
+            <li>Δ<var>r</var> = <var>r</var>(<var>t</var> + Δ<var>t</var>) − <var>r</var>(<var>t</var>)</li>
+            <li><var>v</var><sub>avg</sub> = Δ<var>r</var> / Δ<var>t</var></li>
+            <li>Δ<var>v</var> = <var>v</var>(<var>t</var> + Δ<var>t</var>) − <var>v</var>(<var>t</var>)</li>
+            <li><var>a</var><sub>avg</sub> = Δ<var>v</var> / Δ<var>t</var></li>
+            <li><var>F</var>(<var>t</var>) = <var>m</var> <var>a</var>(<var>t</var>)</li>
+            <li><var>F</var> = <var>m v</var><sup>2</sup> / <var>R</var></li>
+            <li><var>v</var> = <var>Rω</var>, &nbsp; <var>a</var> = <var>Rω</var><sup>2</sup>, &nbsp; <var>T</var> = 2π / <var>ω</var>, &nbsp; <var>f</var> = 1 / <var>T</var></li>
+          </ul>
+          <p class="note">Centripetal force is not an extra kind of force. It is the net force pointing toward the center, the force that produces the centripetal acceleration. Changing the mass changes <var>F</var>. It does not change <var>a</var>.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
